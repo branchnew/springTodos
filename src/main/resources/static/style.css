@@ -1,0 +1,244 @@
+* {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #f5f5f5;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+button, input, a, h6{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #777;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.todoList, .links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper{
+  display: grid;
+  grid-template-rows: 2fr 5fr 1fr 2fr;
+  grid-template-columns: 3fr 4fr 3fr;
+  grid-template-areas: 
+    "hdl hd hdr"
+    "scl sc scr"
+    "ftl ft ftr";
+}
+
+.hd {
+  display: flex;
+  justify-content: center;
+  grid-area: hd;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: 100;
+  color: rgba(175, 47, 47, 0.15);
+  padding-top: 30px;
+}
+
+.sc {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  grid-area: sc;
+}
+
+.todoList li {
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+ 
+.button {
+  color: rgba(175, 47, 47, 0.75);
+  background-color: white;
+  border: none;
+  padding-right: 30px;
+  font-weight: 800;
+}
+
+.select {
+  position: absolute;
+  padding: 20px 0 0 20px;
+  color: #e6e6e6;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 16px 16px 60px;
+  color: #4d4d4d;
+  font-size: 24px;
+  font-weight: 300;
+  box-shadow: unset;
+  border: unset;
+  border-bottom: 1px solid #ededed;
+  position: relative;
+}
+
+.editing {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  padding: 16px 16px 16px 60px;
+  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #999;
+  color: #4d4d4d;
+  font-size: 24px;
+}
+
+.input::-moz-placeholder {
+  color: #e6e6e6;
+  font-style: italic;
+} 
+
+.input:hover {
+  border-color: #ededed;
+}
+
+.input:focus {
+  border-color: #ededed;
+  box-shadow: unset;
+}
+
+.inputfield {
+  display: flex;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+} 
+
+.task {
+  display: flex;
+  width: 100%;
+  background: white;
+  border-bottom: 0.5px solid #ededed;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+  font-weight: 100;
+  align-items: baseline;
+}
+
+.checkbox {
+  padding-left: 15px;
+}
+
+.ft p {
+  align-self: center;
+}
+
+.icon {
+  border: none;
+  flex: 2;
+}
+
+.hidden, .template {
+  display: none !important;
+}
+
+.lineThrough {
+  text-decoration: line-through;
+  border-radius: 25px;
+}
+
+.text.lineThrough{
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 100;
+  width: 100%;
+}
+
+.text {
+  padding: 15px;
+  color: #4d4d4d;
+  font-weight: 300;
+  flex: 2;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: white;
+  font-size: 12px;
+  color: #777;
+  padding: 16px 5px 16px 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.menu::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  box-shadow: 0 1px 1px 
+rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6, 
+  0 9px 1px -3px rgba(0, 0, 0, 0.2), 
+  0 16px 0 -6px #f6f6f6, 0 17px 2px -6px
+  rgba(0, 0, 0, 0.2);
+} 
+
+.tasksLeft {
+  padding-left: 15px;
+}
+
+.links {
+  display: flex;
+  padding-right: 15px;
+}
+
+.links li {
+  align-self: center;
+}
+
+.links a:hover {
+  border: 1px solid rgba(175, 47, 47, 0.15);
+  color:  #777;
+}
+
+.clearall {
+  border: none;
+  background-color: transparent;
+}
+
+a {
+  padding: 2px 5px 2px 5px;
+  text-decoration: none;
+}
+
+.clearall:hover {
+  text-decoration: underline;
+}
+
+.ft {
+  display: flex;
+  grid-area: ft;
+  justify-content: center;
+  font-size: 10px;
+  color: #bfbfbf;
+}
+
+@media (max-width: 893px) {
+  .menu {
+      flex-wrap: wrap;
+  }
+  .input {
+    width: unset;
+  }
+  .clearall {
+    padding-left: 15px;
+  }
+}
