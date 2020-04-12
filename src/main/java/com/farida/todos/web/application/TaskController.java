@@ -45,9 +45,8 @@ public class TaskController {
   }
 
   @PutMapping(value = "/all")
-  public void changeStatusAll(@RequestParam(name = "status") String status) {
-    boolean setStatus = status.toLowerCase().equals("true");
-    service.updateAll(setStatus);
+  public void changeStatusAll(@RequestParam(name = "status") boolean status) {
+    service.updateAll(status);
   }
 
   @PutMapping(value = "/{id}")
