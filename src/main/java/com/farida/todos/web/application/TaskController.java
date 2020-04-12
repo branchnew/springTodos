@@ -17,11 +17,6 @@ public class TaskController {
   @Autowired
   private TaskService service;
 
-  @GetMapping(value = "hello")
-  public String hello(){
-    return "Hello world!";
-  }
-
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Task create(@RequestParam Map<String, String> body) {
@@ -33,8 +28,13 @@ public class TaskController {
     return service.getAll();
   }
 
-  @DeleteMapping(value = "/{id}")
+  @DeleteMapping(value = "/all")
   @ResponseStatus(HttpStatus.OK)
+  public void deleteAll() {
+    service.destroyAll();
+  }
+
+  @DeleteMapping(value = "/{id}")
   public ResponseEntity<?> delete(@PathVariable("id") Long id) {
     try {
       service.deleteById(id);
@@ -42,6 +42,12 @@ public class TaskController {
     } catch(EmptyResultDataAccessException e) {
      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+  }
+
+  @PutMapping(value = "/all")
+  public void changeStatusAll(@RequestParam(name = "status") String status) {
+    boolean setStatus = status.toLowerCase().equals("true");
+    service.updateAll(setStatus);
   }
 
   @PutMapping(value = "/{id}")
@@ -53,6 +59,8 @@ public class TaskController {
       return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
   }
+
+
 
 
 }

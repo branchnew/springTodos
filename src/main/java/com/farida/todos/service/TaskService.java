@@ -42,4 +42,14 @@ public class TaskService {
     }
     return taskRepository.save(task);
   }
+
+  public void destroyAll() {
+    taskRepository.deleteAll();
+  }
+
+  public void updateAll(boolean status) {
+    var tasks = taskRepository.findAll();
+    tasks.forEach(task -> task.setStatus(status));
+    taskRepository.saveAll(tasks);
+  }
 }
