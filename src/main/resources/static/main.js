@@ -4,7 +4,7 @@ const templateTask = document.querySelector('.template');
 const menu = document.querySelector('.menu');
 const clearCompleted = document.querySelector('.clearall');
 
-let todoList = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+let todoList = [];
 
 const updateItemsLeft = () => {
   let tasks = document.querySelectorAll('.todoList>li');
@@ -21,7 +21,7 @@ const updateItemsLeft = () => {
   tasksLeft.textContent = tasksLeftCount + " items left";
 };
 
-const createTask = (task) => {
+const createTask = async (task) => {
   const clone = templateTask.cloneNode(true);
   const text = clone.querySelector('.text');
   const button = clone.querySelector('.button');
@@ -33,8 +33,11 @@ const createTask = (task) => {
   listElement.appendChild(clone);
   
   text.textContent = task.title;
-  localStorage.setItem('tasks', JSON.stringify(todoList));
-  
+  if(!task.id){
+    task.id = await api.create(task.title);
+  }
+  task.completed = task.status;
+
   if(task.completed === true){
     text.classList.toggle('lineThrough');
     selectedTask.checked = true;
@@ -46,7 +49,7 @@ const createTask = (task) => {
 
   button.onclick = (e) => {
     todoList = todoList.filter((item) => item.title !== text.textContent);
-    localStorage.setItem('tasks', JSON.stringify(todoList));
+    api.delete(task.id);
     listElement.removeChild(clone);
     updateItemsLeft();
   };
@@ -54,7 +57,7 @@ const createTask = (task) => {
   selectedTask.onclick = (e) => {
     text.classList.toggle('lineThrough');
     task.completed = !task.completed;
-    localStorage.setItem('tasks', JSON.stringify(todoList));
+    api.edit(task.id, {status: task.completed});
     updateItemsLeft();
     
     if(task.completed){
@@ -78,7 +81,7 @@ const createTask = (task) => {
     input.classList.add('hidden');
     task.title = input.value;
     text.textContent = task.title;
-    localStorage.setItem('tasks', JSON.stringify(todoList));
+    api.edit(task.id, {title: task.title});
   };
 
   input.onchange = inputEdit;
@@ -149,8 +152,6 @@ window.onhashchange = () => {
   } 
 };
       
-todoList.forEach(createTask);
-
 input.onchange = (e) => {
   let task = {
     title: input.value,
@@ -160,8 +161,6 @@ input.onchange = (e) => {
   createTask(task);
   input.value = '';
 };
-
-updateItemsLeft();
 
 const clearButton = document.querySelector('footer>.clearall');
 clearButton.onclick = () => {
@@ -185,11 +184,12 @@ api.getAll = async () => {
 api.create = async (title) => {
   const formatData = new URLSearchParams();
   formatData.append('title', title);
-  await fetch('/api/task', {
+  const result = await fetch('/api/task', {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: formatData.toString()
-  })
+  });
+  return result.id;
 };
 
 api.delete = async (id) => {
@@ -214,10 +214,16 @@ api.edit = async (id, params) => {
   })
 };
 
-api.editAll = async(status) => {
+api.changeStatusAll = async(status) => {
   await api.edit('all', {status});
 };
 
+//main
+api.getAll().then(data => {
+  todoList = data;
+  todoList.forEach(createTask);
+  updateItemsLeft();
+});
 
 
 
