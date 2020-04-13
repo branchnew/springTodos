@@ -19,7 +19,7 @@ const updateItemsLeft = () => {
   },0);
   
   tasksLeft.textContent = tasksLeftCount + " items left";
-}
+};
 
 const createTask = (task) => {
   const clone = templateTask.cloneNode(true);
@@ -49,7 +49,7 @@ const createTask = (task) => {
     localStorage.setItem('tasks', JSON.stringify(todoList));
     listElement.removeChild(clone);
     updateItemsLeft();
-  }
+  };
   
   selectedTask.onclick = (e) => {
     text.classList.toggle('lineThrough');
@@ -65,13 +65,13 @@ const createTask = (task) => {
         clearCompleted.classList.add('hidden');
       }
     }
-  }
+  };
 
   clone.ondblclick = () => {
     input.value = task.title;
     taskTodo.classList.add('hidden');
     input.classList.remove('hidden');
-  }
+  };
 
   const inputEdit = () => {
     taskTodo.classList.remove('hidden');
@@ -79,7 +79,7 @@ const createTask = (task) => {
     task.title = input.value;
     text.textContent = task.title;
     localStorage.setItem('tasks', JSON.stringify(todoList));
-  } 
+  };
 
   input.onchange = inputEdit;
   input.onblur = inputEdit;
@@ -115,7 +115,7 @@ select.onclick = () => {
     } 
   })
   
-}  
+};
 
 window.onhashchange = () => {
   
@@ -130,7 +130,7 @@ window.onhashchange = () => {
         } else {
           li.classList.remove('hidden');
         }
-      })
+      });
       break;
     case '#active':
       lists.forEach((li) => {
@@ -140,7 +140,7 @@ window.onhashchange = () => {
         } else {
           li.classList.remove('hidden');
         }
-      })
+      });
       break;
     default:
       lists.forEach((li) => {
@@ -155,7 +155,7 @@ input.onchange = (e) => {
   let task = {
     title: input.value,
     completed: false
-  }
+  };
   todoList.push(task);
   createTask(task);
   input.value = '';
@@ -174,6 +174,48 @@ clearButton.onclick = () => {
       clearCompleted.classList.add('hidden');
     }
   })
+};
+
+const api = {};
+api.getAll = async () => {
+  const response = await fetch('/api/task');
+  return await response.json();
+};
+
+api.create = async (title) => {
+  const formatData = new URLSearchParams();
+  formatData.append('title', title);
+  await fetch('/api/task', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: formatData.toString()
+  })
+};
+
+api.delete = async (id) => {
+  await fetch(`/api/task/${id}`, {
+    method: 'DELETE'
+  })
+};
+
+api.deleteAll = async () => {
+  await api.delete('all');
+};
+
+api.edit = async (id, params) => {
+  const formatData = new URLSearchParams();
+  for(const property in params){
+    formatData.append(property, params[property]);
+  }
+  await fetch(`/api/task/${id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: formatData.toString()
+  })
+};
+
+api.editAll = async(status) => {
+  await api.edit('all', {status});
 };
 
 
