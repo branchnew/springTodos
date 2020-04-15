@@ -95,9 +95,10 @@ const createTask = async (task) => {
   clone.onmouseover = () => {
     button.classList.remove('hidden');
   };
+
   clone.onmouseout = () => {
     button.classList.add('hidden');
-  }
+  };
 };
 
 const select = document.querySelector('.select');
