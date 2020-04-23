@@ -34,7 +34,10 @@ Instead of implementing the business logic in the controller I created service c
 make the code clean and I can use it in case I have to use the Task entity somewhere else
 without repeating code.
 In the end comes the REST controller class where I @Autowired the TaskService class and 
-called the methods.
+called the methods. 
+My API is RESTful referred to Richardson Maturity Model, it uses different URI, sends
+request with different methods then gets the request code back as response(created, ok, 
+bad request).
 
 
 
