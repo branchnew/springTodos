@@ -237,6 +237,10 @@ a {
   padding: 100px;
 }
 
+.ft p {
+  text-align: center;
+}
+
 @media (max-width: 893px) {
   .menu {
       flex-wrap: wrap;
