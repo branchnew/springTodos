@@ -39,6 +39,9 @@ My API is RESTful referred to Richardson Maturity Model, it uses different URI, 
 request with different methods then gets the request code back as response(created, ok, 
 bad request).
 
+I used the api calls(endpoints) in my frontend code to connect with the backend.
+
+I didn't comment The code because its self is self-explanatory.
 
 
 

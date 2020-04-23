@@ -4,6 +4,13 @@ import javax.persistence.*;
 
 @Entity
 public class Task {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+
+  private String title;
+
+  private boolean status = false;
 
   public Long getId() {
     return id;
@@ -28,13 +35,4 @@ public class Task {
   public void setStatus(boolean status) {
     this.status = status;
   }
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
-
-  private String title;
-
-  private boolean status = false;
-
 }
