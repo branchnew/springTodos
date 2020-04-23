@@ -27,8 +27,8 @@ button, input, a, h6{
 
 #wrapper{
   display: grid;
-  grid-template-rows: 2fr 3fr 2fr;
-  grid-template-columns: 2fr 3fr 2fr;
+  grid-template-rows: 20% 60% 20%;
+  grid-template-columns: 25% 50% 25%;
   grid-template-areas: 
     ". hd ."
     ". sc ."
