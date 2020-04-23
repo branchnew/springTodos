@@ -76,12 +76,12 @@ const createTask = async (task) => {
     input.classList.remove('hidden');
   };
 
-  const inputEdit = () => {
+  const inputEdit = async () => {
     taskTodo.classList.remove('hidden');
     input.classList.add('hidden');
     task.title = input.value;
     text.textContent = task.title;
-    api.edit(task.id, {title: task.title});
+    await api.edit(task.id, {title: task.title});
   };
 
   input.onchange = inputEdit;
