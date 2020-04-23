@@ -1,11 +1,10 @@
 
 # springTodos
 
-I created my spring boot application using Initializr where I added this dependencies:   
-.Thymeleaf  
-.Dev tools  
-.JPA  
-.Web
+I created my spring boot application using Initializr where I added this dependencies:    
+.Dev tools: improve the development-time experience.  
+.JPA: Java specification for managing relational data.  
+.Web: uses Spring MVC, REST and Tomcat as a default embedded server.
 
 I started looking to my user stories and to my ER diagram to understand how to build the 
 entity class and which functions I had. And I created my MVC structure and where
@@ -35,6 +34,7 @@ make the code clean and I can use it in case I have to use the Task entity somew
 without repeating code.
 In the end comes the REST controller class where I @Autowired the TaskService class and 
 called the methods. 
+
 My API is RESTful referred to Richardson Maturity Model, it uses different URI, sends
 request with different methods then gets the request code back as response(created, ok, 
 bad request).
