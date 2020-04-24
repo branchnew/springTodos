@@ -3,14 +3,15 @@ package com.farida.todos.data.entity;
 import javax.persistence.*;
 
 @Entity
+@Table
 public class Task {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
-
+  @Column
   private String title;
-
+  @Column
   private boolean status = false;
 
   public Long getId() {

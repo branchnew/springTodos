@@ -20,7 +20,7 @@ the implementation of data access layers avoiding the boilerplate code.
 In my application.properties I had to configure the database URL, username, and password,
 the SQL dialect and hibernate ddl-auto that will automatically created and updated the table 
 task on application startup.That will connect my application to MySql server. 
-
+I use application-dev.properties with the fake password.  
 After that, on the Task class that represents data I have created bean entity which is the 
 task table stored in database.
 
