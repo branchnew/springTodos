@@ -16,21 +16,21 @@ public class TaskService {
   public TaskService(TaskRepository taskRepository) {
     this.taskRepository = taskRepository;
   }
-
+  //create a task
   public Task create(String title){
     var task = new Task();
     task.setTitle(title);
     return taskRepository.save(task);
   }
-
+  //get all tasks
   public Iterable<Task> getAll() {
     return taskRepository.findAll();
   }
-
+  //delete by id a task
   public void deleteById(Long id) {
     taskRepository.deleteById(id);
   }
-
+  //edit a task title and change task status
   public Task edit(Long id, Map<String, String> body) {
     var task = taskRepository.findById(id).get();
     if(body.containsKey("title")) {
@@ -42,11 +42,11 @@ public class TaskService {
     }
     return taskRepository.save(task);
   }
-
+  //delete all tasks
   public void destroyAll() {
     taskRepository.deleteAll();
   }
-
+  //change status to all tasks
   public void updateAll(boolean status) {
     var tasks = taskRepository.findAll();
     tasks.forEach(task -> task.setStatus(status));
